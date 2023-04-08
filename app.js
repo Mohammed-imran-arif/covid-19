@@ -87,7 +87,9 @@ const convertStateDbObject = (dbObject) => {
 app.get("/states/", authetication, async (request, response) => {
   const getStateQuery = `select * from state;`;
   const getStateQueryResponse = await db.all(getStateQuery);
-  response.send(getStateQueryResponse);
+   response.send(
+    getStateQueryResponse.map((each) => convertStateDbObject(each))
+  );
 });
 //GET state API
 app.get("/states/:stateId/", authetication, async (request, response) => {
@@ -121,7 +123,9 @@ app.get("/districts/:districtId/", authetication, async (request, response) => {
   const { districtId } = request.params;
   const getDistrictQuery = `select * from district where district_id=${districtId};`;
   const getDistrictResponse = await db.get(getDistrictQuery);
-  response.send(getDistrictResponse);
+   response.send(
+    getDistrictResponse.map((each) => convertDistrictDbObject(each))
+  );
 });
 //delete district API
 app.delete(
