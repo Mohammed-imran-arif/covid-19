@@ -123,9 +123,7 @@ app.get("/districts/:districtId/", authetication, async (request, response) => {
   const { districtId } = request.params;
   const getDistrictQuery = `select * from district where district_id=${districtId};`;
   const getDistrictResponse = await db.get(getDistrictQuery);
-   response.send(
-    getDistrictResponse.map((each) => convertDistrictDbObject(each))
-  );
+  response.send(convertDistrictDbObject(getDistrictResponse));
 });
 //delete district API
 app.delete(
