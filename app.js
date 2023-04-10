@@ -101,7 +101,7 @@ app.get("/states/:stateId/", authetication, async (request, response) => {
 //ADD district API
 app.post("/districts/", authetication, async (request, response) => {
   const { districtName, stateId, cases, cured, active, deaths } = request.body;
-  const getDistrictQuery = `insert into district(district_name,state_id,cases,active,cured,deaths)
+  const getDistrictQuery = `insert into district(district_name,state_id,cases,cured,active,deaths)
 values('${districtName}',${stateId},'${cases}','${cured}','${active}','${deaths}');`;
   const getDistrictResponse = await db.run(getDistrictQuery);
   response.send("District Successfully Added");
